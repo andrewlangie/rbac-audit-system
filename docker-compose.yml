@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: rbac_audit_postgres
+    environment:
+      POSTGRES_DB: rbac_audit_db
+      POSTGRES_USER: rbac_app
+      POSTGRES_PASSWORD: changeme_in_local_env
+    ports:
+      - "5432:5432"
+    volumes:
+      - rbac_audit_data:/var/lib/postgresql/data
+
+volumes:
+  rbac_audit_data:

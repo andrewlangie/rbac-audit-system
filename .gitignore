@@ -1,0 +1,15 @@
+# Backend (Java/Maven)
+backend/target/
+*.class
+.idea/
+*.iml
+
+# Frontend (Node)
+frontend/node_modules/
+frontend/dist/
+
+# Common
+.vscode/
+.env
+*.log
+.DS_Store
