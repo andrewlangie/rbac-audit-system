@@ -15,21 +15,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Implementing UserDetails directly means Spring Security's auth machinery
- * (password checks, session/token principal, @PreAuthorize checks) works
- * against this entity with no adapter class needed.
  *
- * Note: password field always holds a bcrypt hash, never plaintext. It's
- * never serialized back out in an API response (see the DTO layer we'll
- * add in Phase 2).
  */
 @Entity
-@Table(name = "users")
+@Table(name = "Users")
 @Getter
 @Setter
 @NoArgsConstructor
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,12 +56,6 @@ public class User implements UserDetails {
         this.passwordHash = passwordHash;
     }
 
-    // --- UserDetails contract ---
-    // This is what Spring Security actually consults on every authenticated
-    // request: it flattens roles AND their permissions into one authority
-    // set, so @PreAuthorize can check either "hasRole('ADMIN')" or
-    // "hasAuthority('DOCUMENT_DELETE')" depending on how fine-grained you
-    // want a given endpoint's check to be.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();

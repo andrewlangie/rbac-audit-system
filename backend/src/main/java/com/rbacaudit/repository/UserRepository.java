@@ -1,5 +1,4 @@
 package com.rbacaudit.repository;
-
 import com.rbacaudit.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
